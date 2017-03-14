@@ -9,17 +9,28 @@ import { HomeComponent } from './home.component';
 import { ModalComponent } from './modal.component';
 
 import { ModalModule } from 'ng2-bootstrap/modal';
+import { Page1Component } from './page1/page1.component';
+import { Page2Component } from './page2/page2.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'modal', component: ModalComponent, outlet: 'modal' }
+  {
+    path: 'modal', component: ModalComponent, outlet: 'modal',
+    children: [
+      { path: '', redirectTo: 'page1', pathMatch: 'full' },
+      { path: 'page1', component: Page1Component },
+      { path: 'page2', component: Page2Component }
+    ]
+  }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ModalComponent
+    ModalComponent,
+    Page1Component,
+    Page2Component
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
